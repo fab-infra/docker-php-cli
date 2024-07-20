@@ -2,42 +2,40 @@
 FROM ghcr.io/fab-infra/base-image:opensuse15.6
 
 # PHP with modules
-RUN zypper in -y php7 php7-devel \
-	php7-bcmath \
-	php7-bz2 \
-	php7-ctype \
-	php7-curl \
-	php7-dom \
-	php7-exif \
-	php7-fileinfo \
-	php7-ftp \
-	php7-gd \
-	php7-gettext \
-	php7-gmp \
-	php7-iconv \
-	php7-imagick \
-	php7-intl \
-	php7-json \
-	php7-ldap \
-	php7-mbstring \
-	php7-mysql \
-	php7-opcache \
-	php7-openssl \
-	php7-pcntl \
-	php7-pdo \
-	php7-phar \
-	php7-posix \
-	php7-redis \
-	php7-soap \
-	php7-tidy \
-	php7-tokenizer \
-	php7-xmlreader \
-	php7-xmlrpc \
-	php7-xmlwriter \
-	php7-xsl \
-	php7-zip \
-	php7-zlib \
-	php7-APCu \
+RUN zypper in -y php8 php8-devel \
+	php8-bcmath \
+	php8-bz2 \
+	php8-ctype \
+	php8-curl \
+	php8-dom \
+	php8-exif \
+	php8-fileinfo \
+	php8-ftp \
+	php8-gd \
+	php8-gettext \
+	php8-gmp \
+	php8-iconv \
+	php8-imagick \
+	php8-intl \
+	php8-ldap \
+	php8-mbstring \
+	php8-mysql \
+	php8-opcache \
+	php8-openssl \
+	php8-pcntl \
+	php8-pdo \
+	php8-phar \
+	php8-posix \
+	php8-redis \
+	php8-soap \
+	php8-tidy \
+	php8-tokenizer \
+	php8-xmlreader \
+	php8-xmlwriter \
+	php8-xsl \
+	php8-zip \
+	php8-zlib \
+	php8-APCu \
 	git &&\
 	zypper clean -a
 
@@ -54,9 +52,9 @@ RUN zypper ar -cfp 90 http://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Le
 	zypper clean -a
 
 # Browscap database
-RUN wget -nv https://browscap.org/stream?q=Lite_PHP_BrowsCapINI -O /usr/share/php7/browscap.ini
+RUN wget -nv https://browscap.org/stream?q=Lite_PHP_BrowsCapINI -O /usr/share/php/browscap.ini
 
 # Files
 COPY ./root /
 RUN chmod a+rw /etc/passwd /etc/group &&\
-	chmod -R a+rwX /var/lib/php7
+	chmod -R a+rwX /var/lib/php8

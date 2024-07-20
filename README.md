@@ -8,7 +8,7 @@ The following container paths can be used to mount a dedicated volume or to cust
 
 | Path | Description |
 | ---- | ----------- |
-| /etc/php7/cli/php.ini | PHP configuration |
+| /etc/php8/cli/php.ini | PHP configuration |
 
 ## Useful links
 
