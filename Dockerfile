@@ -54,7 +54,18 @@ RUN zypper ar -cfp 90 http://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Le
 # Browscap database
 RUN wget -nv https://browscap.org/stream?q=Lite_PHP_BrowsCapINI -O /usr/share/php/browscap.ini
 
+# Environment
+ENV PHP_DATE_TIMEZONE="Europe/Paris" \
+	PHP_ENABLE_OPCACHE="1" \
+	PHP_MAX_EXECUTION_TIME="3600" \
+	PHP_MAX_INPUT_TIME="3600" \
+	PHP_MAX_INPUT_VARS="1000" \
+	PHP_MEMORY_LIMIT="4G" \
+	PHP_POST_MAX_SIZE="4G" \
+	PHP_UPLOAD_MAX_FILESIZE="4G"
+
 # Files
 COPY ./root /
-RUN chmod a+rw /etc/passwd /etc/group &&\
-	chmod -R a+rwX /var/lib/php8
+RUN confd -onetime -backend env &&\
+	chmod a+rw /etc/passwd /etc/group &&\
+	chmod -R a+rwX /etc/php8 /var/lib/php8

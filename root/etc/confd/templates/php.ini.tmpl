@@ -285,7 +285,7 @@ zlib.output_compression = Off
 ; implications and is generally recommended for debugging purposes only.
 ; https://php.net/implicit-flush
 ; Note: This directive is hardcoded to On for the CLI SAPI
-;implicit_flush = Off
+implicit_flush = Off
 
 ; The unserialize callback function will be called (with the undefined class'
 ; name as parameter), if the unserializer finds an undefined class
@@ -406,7 +406,7 @@ expose_php = Off
 ; Maximum execution time of each script, in seconds
 ; https://php.net/max-execution-time
 ; Note: This directive is hardcoded to 0 for the CLI SAPI
-;max_execution_time = 30
+max_execution_time = {{getv "/php/max/execution/time"}}
 
 ; Maximum amount of time each script may spend parsing request data. It's a good
 ; idea to limit this time on productions servers in order to eliminate unexpectedly
@@ -416,14 +416,14 @@ expose_php = Off
 ; Development Value: 60 (60 seconds)
 ; Production Value: 60 (60 seconds)
 ; https://php.net/max-input-time
-max_input_time = 60
+max_input_time = {{getv "/php/max/input/time"}}
 
 ; Maximum input variable nesting level
 ; https://php.net/max-input-nesting-level
 ;max_input_nesting_level = 64
 
 ; How many GET/POST/COOKIE input variables may be accepted
-;max_input_vars = 1000
+max_input_vars = {{getv "/php/max/input/vars"}}
 
 ; How many multipart body parts (combined input variable and file uploads) may
 ; be accepted.
@@ -432,7 +432,7 @@ max_input_time = 60
 
 ; Maximum amount of memory a script may consume
 ; https://php.net/memory-limit
-memory_limit = 4G
+memory_limit = {{getv "/php/memory/limit"}}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Error handling and logging ;
@@ -558,7 +558,7 @@ report_memleaks = On
 ; the error message is formatted as HTML or not.
 ; Note: This directive is hardcoded to Off for the CLI SAPI
 ; https://php.net/html-errors
-;html_errors = On
+html_errors = Off
 
 ; If html_errors is set to On *and* docref_root is not empty, then PHP
 ; produces clickable error messages that direct to a page describing the error
@@ -677,7 +677,7 @@ request_order = "GP"
 ; Development Value: Off
 ; Production Value: Off
 ; https://php.net/register-argc-argv
-;register_argc_argv = Off
+register_argc_argv = Off
 
 ; When enabled, the ENV, REQUEST and SERVER variables are created when they're
 ; first used (Just In Time) instead of when the script starts. If these
@@ -700,7 +700,7 @@ auto_globals_jit = On
 ; Its value may be 0 to disable the limit. It is ignored if POST data reading
 ; is disabled through enable_post_data_reading.
 ; https://php.net/post-max-size
-post_max_size = 4G
+post_max_size = {{getv "/php/post/max/size"}}
 
 ; Automatically add files before PHP document.
 ; https://php.net/auto-prepend-file
@@ -852,7 +852,7 @@ file_uploads = On
 
 ; Maximum allowed size for uploaded files.
 ; https://php.net/upload-max-filesize
-upload_max_filesize = 4G
+upload_max_filesize = {{getv "/php/upload/max/filesize"}}
 
 ; Maximum number of files that can be uploaded via a single request
 max_file_uploads = 20
@@ -976,7 +976,7 @@ cli_server.color = On
 [Date]
 ; Defines the default timezone used by the date functions
 ; https://php.net/date.timezone
-date.timezone = 'Europe/Paris'
+date.timezone = '{{getv "/php/date/timezone"}}'
 
 ; https://php.net/date.default-latitude
 ;date.default_latitude = 31.7667
@@ -1783,7 +1783,7 @@ ldap.max_links = -1
 
 [opcache]
 ; Determines if Zend OPCache is enabled
-opcache.enable=1
+opcache.enable={{getv "/php/enable/opcache"}}
 
 ; Determines if Zend OPCache is enabled for the CLI version of PHP
 opcache.enable_cli=1
@@ -1821,7 +1821,7 @@ opcache.revalidate_freq=1
 
 ; If disabled, all PHPDoc comments are dropped from the code to reduce the
 ; size of the optimized code.
-opcache.save_comments=1
+;opcache.save_comments=1
 
 ; If enabled, compilation warnings (including notices and deprecations) will
 ; be recorded and replayed each time a file is included. Otherwise, compilation
