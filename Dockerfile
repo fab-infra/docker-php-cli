@@ -1,5 +1,11 @@
-# PHP based on openSUSE 15.6
-FROM ghcr.io/fab-infra/base-image:opensuse15.6
+# PHP based on openSUSE 16.0
+FROM ghcr.io/fab-infra/base-image:opensuse16.0
+
+# Additional repositories
+RUN zypper ar -cfp 90 https://download.opensuse.org/repositories/server:/php:/applications/16.0/ server:php:applications &&\
+	zypper ar -cfp 90 http://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_16.0/Essentials packman-essentials &&\
+	zypper --gpg-auto-import-keys ref &&\
+	zypper clean -a
 
 # PHP with modules
 RUN zypper in -y php8 php8-devel \
@@ -15,7 +21,6 @@ RUN zypper in -y php8 php8-devel \
 	php8-gettext \
 	php8-gmp \
 	php8-iconv \
-	php8-imagick \
 	php8-intl \
 	php8-ldap \
 	php8-mbstring \
@@ -35,20 +40,12 @@ RUN zypper in -y php8 php8-devel \
 	php8-xsl \
 	php8-zip \
 	php8-zlib \
-	php8-APCu \
+	php-composer2 \
 	git &&\
 	zypper clean -a
 
-# Composer
-RUN zypper ar -cfp 90 https://download.opensuse.org/repositories/server:/php:/applications/15.6/ server:php:applications &&\
-	zypper --gpg-auto-import-keys ref &&\
-	zypper in -y php-composer2 &&\
-	zypper clean -a
-
 # FFmpeg for video processing support (from Packman Essentials)
-RUN zypper ar -cfp 90 http://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_15.6/Essentials packman-essentials &&\
-	zypper --gpg-auto-import-keys ref &&\
-	zypper in -y ffmpeg &&\
+RUN zypper in -y ffmpeg &&\
 	zypper clean -a
 
 # Browscap database
