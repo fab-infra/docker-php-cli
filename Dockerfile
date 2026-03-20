@@ -33,6 +33,7 @@ RUN zypper in -y php8 php8-devel \
 	php8-posix \
 	php8-redis \
 	php8-soap \
+	php8-sodium \
 	php8-tidy \
 	php8-tokenizer \
 	php8-xmlreader \
